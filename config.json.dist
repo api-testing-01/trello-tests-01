@@ -1,0 +1,30 @@
+{
+  "pivotal": {
+    "baseUri": "https://www.pivotaltracker.com/services/v5",
+    "credentials": {
+      "owner": {
+        "token": ""
+      }
+    }
+  },
+  "trello": {
+    "baseUri": "https://api.trello.com/1",
+    "credentials": {
+      "owner": {
+        "key": "",
+        "token": ""
+      }
+    }
+  },
+  "sfdc": {
+    "credentials": {
+      "admin": {
+        "clientId" : "",
+        "clientSecret" : "",
+        "securityToken": "",
+        "userName": "",
+        "password": ""
+      }
+    }
+  }
+}
