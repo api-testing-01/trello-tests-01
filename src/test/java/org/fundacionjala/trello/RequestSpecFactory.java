@@ -9,6 +9,8 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import org.fundacionjala.core.Environment;
+
 public final class RequestSpecFactory {
 
     private static final Environment ENV = Environment.getInstance();

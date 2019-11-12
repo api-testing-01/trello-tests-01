@@ -2,5 +2,6 @@
   "name": "Project created by cucumber",
   "public": true,
   "week_start_day": "Friday",
-  "iteration_length": 2
+  "iteration_length": 2,
+  "new_account_name": "New Account"
 }

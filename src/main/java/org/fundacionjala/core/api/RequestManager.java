@@ -1,4 +1,4 @@
-package org.fundacionjala.trello;
+package org.fundacionjala.core.api;
 
 import java.util.Map;
 
@@ -10,6 +10,37 @@ import io.restassured.specification.RequestSpecification;
 public final class RequestManager {
 
     private RequestManager() {
+    }
+
+    public static Response doRequest(final String httpMethod, final RequestSpecification requestSpecification,
+                                     final String endpoint, final String jsonBody) {
+        if ("POST".equalsIgnoreCase(httpMethod)) {
+            return RequestManager.post(requestSpecification, endpoint, jsonBody);
+        } else if ("PUT".equalsIgnoreCase(httpMethod)) {
+            return RequestManager.put(requestSpecification, endpoint, jsonBody);
+        } else {
+            return RequestManager.patch(requestSpecification, endpoint, jsonBody);
+        }
+    }
+
+    public static Response doRequest(final String httpMethod, final RequestSpecification requestSpecification,
+                                     final String endpoint, final Map<String, String> body) {
+        if ("POST".equalsIgnoreCase(httpMethod)) {
+            return RequestManager.post(requestSpecification, endpoint, body);
+        } else if ("PUT".equalsIgnoreCase(httpMethod)) {
+            return RequestManager.put(requestSpecification, endpoint, body);
+        } else {
+            return RequestManager.patch(requestSpecification, endpoint, body);
+        }
+    }
+
+    public static Response doRequest(final String httpMethod, final RequestSpecification requestSpecification,
+                                     final String endpoint) {
+        if ("GET".equalsIgnoreCase(httpMethod)) {
+            return RequestManager.get(requestSpecification, endpoint);
+        } else {
+            return RequestManager.delete(requestSpecification, endpoint);
+        }
     }
 
     public static Response post(final RequestSpecification requestSpec, final String endpoint,
@@ -48,6 +79,15 @@ public final class RequestManager {
                 .contentType(ContentType.JSON)
                 .when()
                 .body(body)
+                .patch(endpoint);
+        return getResponseWithLogger(response);
+    }
+
+    public static Response patch(final RequestSpecification requestSpec, final String endpoint,
+                                 final Map<String, String> body) {
+        final Response response = RestAssured.given(requestSpec)
+                .params(body)
+                .when()
                 .patch(endpoint);
         return getResponseWithLogger(response);
     }
