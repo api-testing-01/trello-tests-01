@@ -1,4 +1,4 @@
-package org.fundacionjala.trello;
+package org.fundacionjala.core;
 
 import java.io.FileInputStream;
 import java.io.IOException;
