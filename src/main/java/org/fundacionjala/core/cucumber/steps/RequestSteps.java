@@ -66,6 +66,15 @@ public class RequestSteps {
         context.set("LAST_RESPONSE", response);
     }
 
+    @When("I send a GET request to {string} with urlParam")
+    public void iSendARequestToWithUrlParam(final String endpoint, final Map<String, String> urlParam) {
+        RequestSpecification requestSpecification = (RequestSpecification) context.get("REQUEST_SPEC");
+        String builtEndpoint = DynamicIdHelper.buildEndpoint(context, endpoint);
+        response = RequestManager.doRequest(requestSpecification, builtEndpoint, urlParam);
+        context.set("LAST_ENDPOINT", builtEndpoint);
+        context.set("LAST_RESPONSE", response);
+    }
+
     @Then("I validate the response has status code {int}")
     public void iValidateTheResponseHasStatusCode(int expectedStatusCode) {
         int statusCode = response.getStatusCode();

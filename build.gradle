@@ -29,7 +29,7 @@ checkstyle {
 task runFeatures(type: Test) {
     useTestNG()
     options {
-        jvmArgs = ['-Dcucumber.options= --glue org.fundacionjala.trello ' +
+        jvmArgs = ['-Dcucumber.options= --glue org.fundacionjala ' +
                            '--plugin pretty ']
     }
     testLogging.showStandardStreams = true
