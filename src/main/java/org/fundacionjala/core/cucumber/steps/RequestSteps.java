@@ -1,6 +1,5 @@
 package org.fundacionjala.core.cucumber.steps;
 
-import java.util.List;
 import java.util.Map;
 
 import io.cucumber.java.en.And;
