@@ -83,8 +83,9 @@ public class RequestSteps {
 
     @And("I validate the response contains {string} equals {string}")
     public void iValidateTheResponseContainsEquals(final String attribute, final String expectedValue) {
+        String expectedValue1 = DynamicIdHelper.buildEndpoint(context, expectedValue);
         String actualProjectName = response.jsonPath().getString(attribute);
-        Assert.assertEquals(actualProjectName, expectedValue);
+        Assert.assertEquals(actualProjectName, expectedValue1);
     }
 
     @And("I save the response as {string}")
