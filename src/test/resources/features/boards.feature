@@ -9,7 +9,9 @@ Feature: Boards
     }
     """
     And I save the response as "P"
+    And I save the request endpoint for deleting
 
+  @cleanData
   Scenario: PUT Board
     When I send a "PUT" request to "/boards/{P.id}" with json body
     """
@@ -19,5 +21,8 @@ Feature: Boards
     """
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "Board0001 updated by cucumber"
-    And I send a "DELETE" request to "/boards/{P.id}"
-    And I validate the response has status code 200
+
+  @cleanData
+  Scenario: DELETE Board
+    When I send a "DELETE" request to "/boards/{P.id}"
+    Then I validate the response has status code 200

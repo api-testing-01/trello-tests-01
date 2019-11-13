@@ -43,6 +43,11 @@ public final class RequestManager {
         }
     }
 
+    public static Response doRequest(final RequestSpecification requestSpecification,
+                                     final String endpoint, final Map<String, String> urlParam) {
+            return RequestManager.get(requestSpecification, endpoint, urlParam);
+    }
+
     public static Response post(final RequestSpecification requestSpec, final String endpoint,
                                 final String body) {
         final Response response = RestAssured.given(requestSpec)
@@ -110,6 +115,15 @@ public final class RequestManager {
 
     public static Response get(final RequestSpecification requestSpec, final String endpoint) {
         final Response response = RestAssured.given(requestSpec)
+                .when()
+                .get(endpoint);
+        return getResponseWithLogger(response);
+    }
+
+    public static Response get(final RequestSpecification requestSpec, final String endpoint,
+                               final Map<String, String> urlParam) {
+        final Response response = RestAssured.given(requestSpec)
+                .params(urlParam)
                 .when()
                 .get(endpoint);
         return getResponseWithLogger(response);
