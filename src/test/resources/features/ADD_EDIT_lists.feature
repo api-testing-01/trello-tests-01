@@ -54,7 +54,7 @@ Feature: Lists
     """
     And I save the response as "B2"
     And I save the request endpoint for deleting
-    When I send a "PUT" request to "/lists/{L.id}" with json body
+    And I send a "PUT" request to "/lists/{L.id}" with json body
     """
     {
     "idBoard": "(B2.id)"
