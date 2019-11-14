@@ -3,7 +3,7 @@ language: java
 jdk:
 - openjdk8
 before_script:
-- wget http://services.gradle.org/distributions/gradle-5.5.1-bin.zip
+- wget https://services.gradle.org/distributions/gradle-5.5.1-bin.zip
 - unzip gradle-5.5.1-bin.zip
 - export GRADLE_HOME=$PWD/gradle-5.5.1
 - export PATH=$GRADLE_HOME/bin:$PATH
