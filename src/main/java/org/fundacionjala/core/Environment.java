@@ -24,4 +24,9 @@ public final class Environment {
         return jsonContext.read(keyJsonPath);
     }
 
+    public String getPropertyByService(final String serviceName, final String account) {
+        String property = String.format("%s.credentials.%s.username", serviceName, account);
+        return getValue(property);
+    }
+
 }

@@ -1,7 +1,7 @@
 Feature: Add and edit Checklists
 
   Background:
-    Given I use the "trello" service and the "owner" account
+    Given I use the "trello" service and the "user2" account
     And I send a "POST" request to "/boards" with json body
     """
     {
@@ -10,6 +10,7 @@ Feature: Add and edit Checklists
     """
     And I save the response as "B"
     And I save the request endpoint for deleting
+    And I add "user4" as admin member to board with id "{B.id}"
     And I send a "POST" request to "/lists" with json body
     """
     {
@@ -29,7 +30,8 @@ Feature: Add and edit Checklists
 
   @cleanData
   Scenario: Add a checklist
-    When I send a "POST" request to "/checklists" with json body
+    When I use the "trello" service and the "user4" account
+    And I send a "POST" request to "/checklists" with json body
     """
     {
     "idCard": "(C.id)",
@@ -42,7 +44,7 @@ Feature: Add and edit Checklists
     And I validate the response contains "pos" equals "16384"
 
   @cleanData
-  Scenario: Edit name and post checklist attributes (using id endpoint)
+  Scenario: Edit name and position checklist attributes (using id endpoint)
     Given I send a "POST" request to "/checklists" with json body
     """
     {
@@ -65,7 +67,8 @@ Feature: Add and edit Checklists
 
   @cleanData
   Scenario: Edit checklist name (using name endpoint)
-    Given I send a "POST" request to "/checklists" with json body
+    Given I use the "trello" service and the "user4" account
+    And I send a "POST" request to "/checklists" with json body
     """
     {
     "idCard": "(C.id)",

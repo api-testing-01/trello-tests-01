@@ -1,7 +1,7 @@
 Feature: Get, copy and delete Checklists
 
   Background:
-    Given I use the "trello" service and the "owner" account
+    Given I use the "trello" service and the "user2" account
     And I send a "POST" request to "/boards" with json body
     """
     {
@@ -10,6 +10,7 @@ Feature: Get, copy and delete Checklists
     """
     And I save the response as "B"
     And I save the request endpoint for deleting
+    And I add "user1" as admin member to board with id "{B.id}"
     And I send a "POST" request to "/lists" with json body
     """
     {
@@ -52,7 +53,8 @@ Feature: Get, copy and delete Checklists
 
   @cleanData
   Scenario: Get card name of checklist using nested resources
-    When I send a GET request to "/checklists/{CHC.id}" with urlParam
+    When I use the "trello" service and the "user1" account
+    And I send a GET request to "/checklists/{CHC.id}" with urlParam
       | fields      | name |
       | cards       | open |
       | card_fields | name |
@@ -89,5 +91,6 @@ Feature: Get, copy and delete Checklists
 
   @cleanData
   Scenario: Delete checklist from card
-    When I send a "DELETE" request to "/checklists/{CHC.id}"
+    When I use the "trello" service and the "user1" account
+    And I send a "DELETE" request to "/checklists/{CHC.id}"
     Then I validate the response has status code 200
