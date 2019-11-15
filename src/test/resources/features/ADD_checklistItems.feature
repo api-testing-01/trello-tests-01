@@ -1,7 +1,7 @@
 Feature: Add checkItems in checklist
 
   Background:
-    Given I use the "trello" service and the "owner" account
+    Given I use the "trello" service and the "user2" account
     And I send a "POST" request to "/boards" with json body
     """
     {
@@ -10,6 +10,7 @@ Feature: Add checkItems in checklist
     """
     And I save the response as "B"
     And I save the request endpoint for deleting
+    And I add "user3" as admin member to board with id "{B.id}"
     And I send a "POST" request to "/lists" with json body
     """
     {
@@ -38,7 +39,8 @@ Feature: Add checkItems in checklist
 
   @cleanData
   Scenario Outline: Add checkItem
-    When I send a "POST" request to "/checklists/{CH.id}/checkItems" with json body
+    When I use the "trello" service and the "user3" account
+    And I send a "POST" request to "/checklists/{CH.id}/checkItems" with json body
     """
     {
     "name": "<checkItem>",

@@ -10,6 +10,7 @@ Feature: Get and delete checkItems in checklist
     """
     And I save the response as "B"
     And I save the request endpoint for deleting
+    And I add "user2" as admin member to board with id "{B.id}"
     And I send a "POST" request to "/lists" with json body
     """
     {
@@ -63,7 +64,8 @@ Feature: Get and delete checkItems in checklist
 
   @cleanData
   Scenario: Get checkItem details by id
-    When I send a GET request to "/checklists/{CH.id}/checkItems/{CI2.id}" with urlParam
+    When I use the "trello" service and the "user2" account
+    And I send a GET request to "/checklists/{CH.id}/checkItems/{CI2.id}" with urlParam
       | fields      | all |
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "Refactor scenarios"
