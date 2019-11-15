@@ -42,7 +42,7 @@ Feature: Add and edit Checklists
     And I validate the response contains "pos" equals "16384"
 
   @cleanData
-  Scenario: Edit name and post checklist attributes (using id endpoint)
+  Scenario: Edit name and position checklist attributes (using id endpoint)
     Given I send a "POST" request to "/checklists" with json body
     """
     {

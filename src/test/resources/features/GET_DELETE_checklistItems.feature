@@ -13,7 +13,7 @@ Feature: Get and delete checkItems in checklist
     And I send a "POST" request to "/lists" with json body
     """
     {
-    "name": "Working List",
+    "name": "CheckItem List4",
     "idBoard": "(B.id)"
     }
     """
@@ -21,7 +21,7 @@ Feature: Get and delete checkItems in checklist
     And I send a "POST" request to "/cards" with json body
     """
     {
-    "name": "Card1",
+    "name": "Card4",
     "idList": "(L.id)"
     }
     """
@@ -30,7 +30,7 @@ Feature: Get and delete checkItems in checklist
     """
     {
     "idCard": "(C.id)",
-    "name": "Trello Checklist",
+    "name": "Trello CheckItem",
     "pos": "16380"
     }
     """

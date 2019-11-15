@@ -13,7 +13,7 @@ Feature: Add checkItems in checklist
     And I send a "POST" request to "/lists" with json body
     """
     {
-    "name": "Working List",
+    "name": "CheckItem List3",
     "idBoard": "(B.id)"
     }
     """
@@ -21,7 +21,7 @@ Feature: Add checkItems in checklist
     And I send a "POST" request to "/cards" with json body
     """
     {
-    "name": "Card1",
+    "name": "Card3",
     "idList": "(L.id)"
     }
     """
@@ -30,7 +30,7 @@ Feature: Add checkItems in checklist
     """
     {
     "idCard": "(C.id)",
-    "name": "Trello Checklist",
+    "name": "Trello CheckItem2",
     "pos": "16380"
     }
     """
@@ -42,16 +42,16 @@ Feature: Add checkItems in checklist
     """
     {
     "name": "<checkItem>",
-    "pos": "16350",
+    "pos": "16352",
     "checked": "<checked>"
     }
     """
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "<checkItem>"
-    And I validate the response contains "pos" equals "16350"
+    And I validate the response contains "pos" equals "16352"
     And I validate the response contains "state" equals "<state>"
 
     Examples:
       | checkItem          | checked | state      |
       | Identify scenarios | true    | complete   |
-      | Add scenarios      | false   | incomplete |
+      | Write scenarios    | false   | incomplete |
