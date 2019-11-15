@@ -12,7 +12,28 @@
     "credentials": {
       "owner": {
         "key": "",
-        "token": ""
+        "token": "",
+        "username": ""
+      }
+      "user1": {
+        "key": "",
+        "token": "",
+        "username": ""
+      },
+      "user2": {
+        "key": "",
+        "token": "",
+        "username": ""
+      },
+      "user3": {
+        "key": "",
+        "token": "",
+        "username": ""
+      },
+      "user4": {
+        "key": "",
+        "token": "",
+        "username": ""
       }
     }
   },
