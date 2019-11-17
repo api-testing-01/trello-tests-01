@@ -18,9 +18,9 @@ public final class RequestManager {
             return RequestManager.post(requestSpecification, endpoint, jsonBody);
         } else if ("PUT".equalsIgnoreCase(httpMethod)) {
             return RequestManager.put(requestSpecification, endpoint, jsonBody);
-        } else {
-            return RequestManager.patch(requestSpecification, endpoint, jsonBody);
-        }
+        } else if ("GET".equalsIgnoreCase(httpMethod)) {
+            return RequestManager.get(requestSpecification, endpoint, jsonBody);
+        }   return RequestManager.patch(requestSpecification, endpoint, jsonBody);
     }
 
     public static Response doRequest(final String httpMethod, final RequestSpecification requestSpecification,
@@ -125,6 +125,16 @@ public final class RequestManager {
         final Response response = RestAssured.given(requestSpec)
                 .params(urlParam)
                 .when()
+                .get(endpoint);
+        return getResponseWithLogger(response);
+    }
+
+    public static Response get(final RequestSpecification requestSpec, final String endpoint,
+                               final String body) {
+        final Response response = RestAssured.given(requestSpec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(body)
                 .get(endpoint);
         return getResponseWithLogger(response);
     }
