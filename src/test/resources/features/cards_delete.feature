@@ -44,7 +44,7 @@ Feature: Cards
     }
     """
     And I save the response as "LB"
-    Then I send a "POST" request to "/cards/{C.id}/idLabels" with json body
+    And I send a "POST" request to "/cards/{C.id}/idLabels" with json body
     """
     {
     "id": "(C.id)",
