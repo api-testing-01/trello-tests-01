@@ -65,7 +65,6 @@ Feature: Lists
       | closed  | false              |
       | idBoard | {B2.id}            |
 
-
   @cleanData
   Scenario Outline: Close List
     When I send a "PUT" request to "/lists/{L1.id}/closed" with json body

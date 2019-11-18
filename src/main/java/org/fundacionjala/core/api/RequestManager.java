@@ -20,7 +20,8 @@ public final class RequestManager {
             return RequestManager.put(requestSpecification, endpoint, jsonBody);
         } else if ("GET".equalsIgnoreCase(httpMethod)) {
             return RequestManager.get(requestSpecification, endpoint, jsonBody);
-        }   return RequestManager.patch(requestSpecification, endpoint, jsonBody);
+        }
+        return RequestManager.patch(requestSpecification, endpoint, jsonBody);
     }
 
     public static Response doRequest(final String httpMethod, final RequestSpecification requestSpecification,
