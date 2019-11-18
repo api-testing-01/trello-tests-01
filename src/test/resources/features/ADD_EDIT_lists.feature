@@ -110,31 +110,45 @@ Feature: Lists
     And I validate the response contains "pos" equals "1024"
 
   @cleanData
-  Scenario Outline: Move cards from one list and board to another
+  Scenario: Move cards from one list and board to another
     When I send a "POST" request to "/cards" with json body
     """
     {
-    "name": "<cName>",
-    "idList": "<cOriginListId>"
-    }
-    """
-    And I send a "POST" request to "/lists/{L2.id}/moveAllCards" with json body
-    """
-    {
-    "idBoard": "(B1.id)",
+    "name": "Card 1 for List 1",
     "idList": "(L1.id)"
     }
     """
+    And I save the response as "C1"
+    And I send a "POST" request to "/cards" with json body
+    """
+    {
+    "name": "Card 2 for List 1",
+    "idList": "(L1.id)"
+    }
+    """
+    And I save the response as "C2"
+    And I send a "POST" request to "/cards" with json body
+    """
+    {
+    "name": "Card 1 for List 2",
+    "idList": "(L2.id)"
+    }
+    """
+    And I save the response as "C3"
+    And I send a "POST" request to "/lists/{L1.id}/moveAllCards" with json body
+    """
+    {
+    "idBoard": "(B2.id)",
+    "idList": "(L2.id)"
+    }
+    """
     Then I validate the response has status code 200
-    And I send a "GET" request to "/lists/{L1.id}/cards"
-    And I validate the response contains "idList" equals "<cNewListId>"
-
-    Examples:
-      | cName             | cOriginListId | cNewListId |
-      | Card 1 for List 1 | (L1.id)       | {L1.id}    |
-      | Card 2 for List 1 | (L1.id)       | {L1.id}    |
-      | Card 1 for List 2 | (L2.id)       | {L1.id}    |
-      | Card 2 for List 2 | (L2.id)       | {L1.id}    |
+    And I send a "GET" request to "/cards/{C1.id}/list"
+    And I validate the response contains "id" equals "{L2.id}"
+    And I send a "GET" request to "/cards/{C2.id}/list"
+    And I validate the response contains "id" equals "{L2.id}"
+    And I send a "GET" request to "/cards/{C3.id}/list"
+    And I validate the response contains "id" equals "{L2.id}"
 
   @cleanData
   Scenario Outline: Subscribe and unsubscribe list
