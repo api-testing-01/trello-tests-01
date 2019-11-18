@@ -18,10 +18,7 @@ Feature: Cards
     }
     """
     And I save the response as "L"
-
-  @cleanData
-  Scenario: POST Card default
-    When I send a "POST" request to "/cards" with json body
+    And I send a "POST" request to "/cards" with json body
     """
     {
     "name": "Card001 created by cucumber",
@@ -29,7 +26,24 @@ Feature: Cards
     "idList": "(L.id)"
     }
     """
-    Then I validate the response has status code 200
-    And I validate the response contains "name" equals "Card001 created by cucumber"
-    And I validate the response contains "desc" equals "Card001 description by cucumber"
+    And I save the response as "C"
 
+  @cleanData
+  Scenario: PUT Card
+    When I send a "PUT" request to "/cards/{C.id}" with json body
+    """
+    {
+    "name": "Card001 updated by cucumber",
+    "desc": "Card001 updated description by cucumber",
+    "idList": "(L.id)",
+    "closed": true,
+    "due": "2019-12-14T20:58:05.914Z",
+    "isTemplate": true
+    }
+    """
+    Then I validate the response has status code 200
+    And I validate the response contains "name" equals "Card001 updated by cucumber"
+    And I validate the response contains "desc" equals "Card001 updated description by cucumber"
+    And I validate the response contains "closed" equals "true"
+    And I validate the response contains "due" equals "2019-12-14T20:58:05.914Z"
+    And I validate the response contains "isTemplate" equals "true"

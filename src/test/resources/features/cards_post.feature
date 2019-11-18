@@ -59,3 +59,30 @@ Feature: Cards
     }
     """
     And I validate the response has status code 200
+
+  @cleanData
+  Scenario: POST Card Comments
+    When I send a "POST" request to "/cards/{C.id}/actions/comments" with json body
+    """
+    {
+    "text": "New Comment"
+    }
+    """
+    Then I validate the response has status code 200
+    And I validate the response contains "data.text" equals "New Comment"
+
+  @cleanData
+  Scenario: POST Card Stickers Negative Testing
+    When I send a "POST" request to "/cards/{C.id}/stickers" with json body
+    """
+    {
+      "id": "(C.id)",
+      "image": "taco-cool",
+      "top": "60",
+      "left": "60",
+      "zIndex": "1"
+    }
+    """
+    Then I validate the response has status code 401
+    And I validate the response contains "error" equals "PRODUCT_FEATURE_NOT_ENABLED"
+    And I validate the response contains "message" equals "premium stickers not enabled"
