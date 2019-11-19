@@ -18,7 +18,7 @@ Feature: Boundary and negative scenarios for Lists
     }
     """
     And I save the response as "L1"
-    
+
   @cleanData
   Scenario: Close a list already closed
     When I send a "PUT" request to "/lists/{L1.id}" with json body
