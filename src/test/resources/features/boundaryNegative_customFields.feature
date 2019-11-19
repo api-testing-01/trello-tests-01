@@ -1,7 +1,7 @@
 Feature: Boundary and negative scenarios for CustomFields
 
   Background:
-    Given I use the "trello" service and the "owner" account
+    Given I use the "trello" service and the "user1" account
     And I send a "POST" request to "/boards" with json body
     """
     {
@@ -71,7 +71,7 @@ Feature: Boundary and negative scenarios for CustomFields
        }
      }
      """
-    When I send a "POST" request to "/customFields" with json body
+    And I send a "POST" request to "/customFields" with json body
     """
      {
        "idModel": "(L.idBoard)",
@@ -104,7 +104,7 @@ Feature: Boundary and negative scenarios for CustomFields
        }
      }
      """
-    When I send a "POST" request to "/customFields" with json body
+    And I send a "POST" request to "/customFields" with json body
     """
      {
        "idModel": "(L.idBoard)",

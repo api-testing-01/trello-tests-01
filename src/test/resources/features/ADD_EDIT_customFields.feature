@@ -1,7 +1,7 @@
 Feature: CustomFields
 
   Background:
-    Given I use the "trello" service and the "owner" account
+    Given I use the "trello" service and the "user1" account
     And I send a "POST" request to "/boards" with json body
     """
     {
