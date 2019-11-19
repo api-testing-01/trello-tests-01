@@ -26,3 +26,11 @@ Feature: Boards
   Scenario: DELETE Board
     When I send a "DELETE" request to "/boards/{P.id}"
     Then I validate the response has status code 200
+
+  @cleanData
+  Scenario: Get Board plugins
+    When I send a "GET" request to "/boards/{P.id}/plugins"
+    And I save the response as "L"
+    Then I validate the response has status code 200
+    And I validate the response contains "name" equals "[Butler]"
+    And I validate the response contains "categories" equals '[[automation, board-utilities]]'
