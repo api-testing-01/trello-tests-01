@@ -1,4 +1,4 @@
-Feature: Get, copy and delete Checklists
+Feature: Get Members
 
   Background:
     Given I use the "trello" service and the "user1" account

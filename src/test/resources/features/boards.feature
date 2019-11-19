@@ -46,7 +46,7 @@ Feature: Boards
     And I validate the response contains "categories" equals '[[automation, board-utilities]]'
 
   @cleanData
-  Scenario: Get a private board
+  Scenario: Get a public board
     Then I send a "GET" request to "/boards/{P.id}"
     And I validate the response contains "prefs.permissionLevel" equals "public"
     And I validate the response contains "name" equals "Board0001 created by cucumber"
