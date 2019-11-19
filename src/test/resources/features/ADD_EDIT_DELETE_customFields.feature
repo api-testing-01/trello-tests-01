@@ -130,7 +130,7 @@ Feature: CustomFields
       }
       """
     And I save the response as "C"
-    And I send a "PUT" request to "customfields/{C.id}" with json body
+    And I send a "PUT" request to "customFields/{C.id}" with json body
     """
     {
       "name": "updated text Field"
@@ -139,3 +139,115 @@ Feature: CustomFields
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "updated text Field"
     And I validate the response contains "modelType" equals "board"
+
+  @cleanData
+  Scenario: Get all options from a custom field
+    When I send a "POST" request to "/customFields" with json body
+      """
+      {
+        "idModel": "(L.idBoard)",
+        "modelType": "board",
+        "name": "dropdown",
+        "type": "list",
+        "pos": 16384,
+        "display": {
+            "cardFront": false
+        },
+        "options": [
+            {
+                "value": {
+                    "text": "first option"
+                },
+                "color": "red",
+                "pos": 1024
+            },
+            {
+                "value": {
+                    "text": "second option"
+                },
+                "color": "blue",
+                "pos": 2048
+            }
+        ]
+      }
+      """
+    And I save the response as "C"
+    And I send a "GET" request to "/customField/{C.id}/options"
+    And I save the response as "O"
+    Then I validate the response has status code 200
+    And I validate the response contains "color" equals "[red, blue]"
+
+  @cleanData
+  Scenario: Get options from a specific custom field ID
+    When I send a "POST" request to "/customFields" with json body
+      """
+      {
+        "idModel": "(L.idBoard)",
+        "modelType": "board",
+        "name": "dropdown",
+        "type": "list",
+        "pos": 16384,
+        "display": {
+            "cardFront": false
+        },
+        "options": [
+            {
+                "value": {
+                    "text": "first option"
+                },
+                "color": "red",
+                "pos": 1024
+            },
+            {
+                "value": {
+                    "text": "second option"
+                },
+                "color": "blue",
+                "pos": 2048
+            }
+        ]
+      }
+      """
+    And I save the response as "C"
+    And I send a "GET" request to "/customField/{C.id}/options"
+    And I save the response as "O"
+    And I send a "GET" request to "/customField/{C.id}/options/{O._id[0]}"
+    Then I validate the response has status code 200
+    And I validate the response contains "color" equals "red"
+
+  @cleanData
+  Scenario: Delete an options from a specific custom field ID
+    When I send a "POST" request to "/customFields" with json body
+      """
+      {
+        "idModel": "(L.idBoard)",
+        "modelType": "board",
+        "name": "dropdown",
+        "type": "list",
+        "pos": 16384,
+        "display": {
+            "cardFront": false
+        },
+        "options": [
+            {
+                "value": {
+                    "text": "first option"
+                },
+                "color": "red",
+                "pos": 1024
+            },
+            {
+                "value": {
+                    "text": "second option"
+                },
+                "color": "blue",
+                "pos": 2048
+            }
+        ]
+      }
+      """
+    And I save the response as "C"
+    And I send a "GET" request to "/customField/{C.id}/options"
+    And I save the response as "O"
+    And I send a "DELETE" request to "/customField/{C.id}/options/{O._id[0]}"
+    Then I validate the response has status code 200

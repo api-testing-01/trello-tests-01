@@ -121,3 +121,24 @@ Feature: Boundary and negative scenarios for CustomFields
     Then I validate the response has status code 409
     And I validate the response contains "message" equals "A custom field with that name and type already exists"
     And I validate the response contains "error" equals "CUSTOM_FIELD_DUPLICATE_FIELD"
+
+  @cleanData
+  Scenario: Custom field other than List does not have Options
+    When I send a "POST" request to "/customFields" with json body
+      """
+      {
+        "idModel": "(L.idBoard)",
+        "modelType": "board",
+        "name": "text Field",
+        "type": "text",
+        "pos": "16384",
+        "display": {
+            "cardFront": true
+        }
+      }
+      """
+    And I save the response as "C"
+    And I send a "GET" request to "/customFields/{C.id}/options"
+    Then I validate the response has status code 404
+    And I validate the response contains "message" equals "Custom fields of type text have no options"
+    And I validate the response contains "error" equals "CUSTOM_FIELD_NOT_LIST_TYPE"
