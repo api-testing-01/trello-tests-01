@@ -5,7 +5,7 @@ Feature: Lists
     And I send a "POST" request to "/boards" with json body
     """
     {
-    "name": "Board 1 for list 1"
+    "name": "Board1 for listGC"
     }
     """
     And I save the response as "B1"
@@ -13,7 +13,7 @@ Feature: Lists
     And I send a "POST" request to "/lists" with json body
     """
     {
-    "name": "List 1 for Board 1",
+    "name": "List1 for Board1GC",
     "idBoard":"(B1.id)"
     }
     """
@@ -21,7 +21,7 @@ Feature: Lists
     And I send a "POST" request to "/boards" with json body
     """
     {
-    "name": "Board 2 for list 2"
+    "name": "Board2 for listGC"
     }
     """
     And I save the response as "B2"
