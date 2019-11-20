@@ -1,7 +1,7 @@
 Feature: Lists
 
   Background:
-    Given I use the "trello" service and the "owner" account
+    Given I use the "trello" service and the "user2" account
     And I send a "POST" request to "/boards" with json body
     """
     {
@@ -29,7 +29,7 @@ Feature: Lists
     And I send a "POST" request to "/lists" with json body
     """
     {
-    "name": "List 2 for Board 2",
+    "name": "List2 for Board2GC",
     "idBoard":"(B2.id)"
     }
     """
@@ -61,7 +61,7 @@ Feature: Lists
 
     Examples:
       | field   | value              |
-      | name    | List 2 for Board 2 |
+      | name    | List2 for Board2GC |
       | closed  | false              |
       | idBoard | {B2.id}            |
 
