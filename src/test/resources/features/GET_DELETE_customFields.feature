@@ -64,7 +64,7 @@ Feature: CustomFields
 
   @cleanData
   Scenario: Delete an options from a specific custom field ID
-    And I send a "GET" request to "/customField/{C.id}/options"
+    When I send a "GET" request to "/customField/{C.id}/options"
     And I save the response as "O"
     And I send a "DELETE" request to "/customField/{C.id}/options/{O._id[0]}"
     Then I validate the response has status code 200
