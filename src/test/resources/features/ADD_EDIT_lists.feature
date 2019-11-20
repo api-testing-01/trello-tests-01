@@ -85,7 +85,7 @@ Feature: Lists
   @cleanData
   Scenario: Update List position
     When I send a "POST" request to "/lists" with json body
-  """
+    """
     {
     "name": "List 3 for Board 1 ",
     "idBoard":"(B1.id)"
