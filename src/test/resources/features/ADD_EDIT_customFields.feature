@@ -130,7 +130,7 @@ Feature: CustomFields
       }
       """
     And I save the response as "C"
-    And I send a "PUT" request to "customfields/{C.id}" with json body
+    And I send a "PUT" request to "customFields/{C.id}" with json body
     """
     {
       "name": "updated text Field"

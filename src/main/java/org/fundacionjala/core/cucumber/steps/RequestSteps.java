@@ -114,14 +114,4 @@ public class RequestSteps {
         String finalEndpoint = String.format("%s/%s", lastEndpoint, lastResponseId);
         context.addEndpoint(finalEndpoint);
     }
-
-    @And("I validate the response contains:")
-    public void iValidateTheResponseContains(final Map<String, String> validationMap) {
-        Map<String, Object> responseMap = response.jsonPath().getMap(".");
-        for (Map.Entry<String, String> data: validationMap.entrySet()) {
-            if (responseMap.containsKey(data.getKey())) {
-                Assert.assertEquals(String.valueOf(responseMap.get(data.getKey())), data.getValue());
-            }
-        }
-    }
 }

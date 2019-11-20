@@ -5,10 +5,20 @@ Feature: Boards
     And I send a "POST" request to "/boards" with json body
     """
     {
-    "name": "Board0001 created by cucumber"
+    "name": "Board0001 created by cucumber",
+    "prefs_permissionLevel": "public"
     }
     """
     And I save the response as "P"
+    And I save the request endpoint for deleting
+    And I send a "POST" request to "/boards" with json body
+    """
+    {
+    "name": "Board0002 created by cucumber",
+    "prefs_permissionLevel": "private"
+    }
+    """
+    And I save the response as "P1"
     And I save the request endpoint for deleting
 
   @cleanData
@@ -34,3 +44,15 @@ Feature: Boards
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "[Butler]"
     And I validate the response contains "categories" equals '[[automation, board-utilities]]'
+
+  @cleanData
+  Scenario: Get a public board
+    When I send a "GET" request to "/boards/{P.id}"
+    Then I validate the response contains "prefs.permissionLevel" equals "public"
+    And I validate the response contains "name" equals "Board0001 created by cucumber"
+
+  @cleanData
+  Scenario: Get a private board
+    When I send a "GET" request to "/boards/{P1.id}"
+    Then I validate the response contains "prefs.permissionLevel" equals "private"
+    And I validate the response contains "name" equals "Board0002 created by cucumber"
