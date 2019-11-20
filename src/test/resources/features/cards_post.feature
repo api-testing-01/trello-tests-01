@@ -88,7 +88,7 @@ Feature: Cards
     And I validate the response contains "message" equals "premium stickers not enabled"
 
   @cleanData
-  Scenario: POST Card Special Characters Name Negative Testing
+  Scenario: POST Card Special Characters Name
     When I send a "POST" request to "/cards/" with json body
     """
     {
@@ -96,7 +96,7 @@ Feature: Cards
     "idList": "(L.id)"
     }
     """
-    And I validate the response has status code 200
+    Then I validate the response has status code 200
     And I validate the response contains "name" equals "!##$$%,%%%^&"
 
   @cleanData
