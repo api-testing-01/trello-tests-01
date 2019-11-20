@@ -1,7 +1,7 @@
 Feature: Cards
 
   Background:
-    Given I use the "trello" service and the "owner" account
+    Given I use the "trello" service and the "user4" account
     And I send a "POST" request to "/boards" with json body
     """
     {
@@ -86,3 +86,27 @@ Feature: Cards
     Then I validate the response has status code 401
     And I validate the response contains "error" equals "PRODUCT_FEATURE_NOT_ENABLED"
     And I validate the response contains "message" equals "premium stickers not enabled"
+
+  @cleanData
+  Scenario: POST Card Special Characters Name Negative Testing
+    When I send a "POST" request to "/cards/" with json body
+    """
+    {
+    "name": "!##$$%,%%%^&",
+    "idList": "(L.id)"
+    }
+    """
+    And I validate the response has status code 200
+    And I validate the response contains "name" equals "!##$$%,%%%^&"
+
+  @cleanData
+  Scenario: POST Card empty Name Boundary Testing
+    When I send a "POST" request to "/cards/" with json body
+    """
+    {
+    "name": "",
+    "idList": "(L.id)"
+    }
+    """
+    Then I validate the response has status code 200
+    And I validate the response contains "name" equals ""
