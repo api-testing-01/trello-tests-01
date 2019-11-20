@@ -47,12 +47,12 @@ Feature: Boards
 
   @cleanData
   Scenario: Get a public board
-    Then I send a "GET" request to "/boards/{P.id}"
-    And I validate the response contains "prefs.permissionLevel" equals "public"
+    When I send a "GET" request to "/boards/{P.id}"
+    Then I validate the response contains "prefs.permissionLevel" equals "public"
     And I validate the response contains "name" equals "Board0001 created by cucumber"
 
   @cleanData
   Scenario: Get a private board
-    Then I send a "GET" request to "/boards/{P1.id}"
-    And I validate the response contains "prefs.permissionLevel" equals "private"
+    When I send a "GET" request to "/boards/{P1.id}"
+    Then I validate the response contains "prefs.permissionLevel" equals "private"
     And I validate the response contains "name" equals "Board0002 created by cucumber"
