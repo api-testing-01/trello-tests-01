@@ -2,6 +2,7 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'checkstyle'
+apply plugin: 'jacoco'
 
 sourceCompatibility = '1.8'
 
@@ -25,6 +26,15 @@ dependencies {
 checkstyle {
     toolVersion = '8.23'
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+check.dependsOn jacocoTestReport
 
 task runFeatures(type: Test) {
     useTestNG()
