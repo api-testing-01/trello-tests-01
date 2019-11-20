@@ -5,7 +5,7 @@ Feature: Lists
     And I send a "POST" request to "/boards" with json body
     """
     {
-    "name": "Board1 for list 1"
+    "name": "Board1 for list1"
     }
     """
     And I save the response as "B1"
@@ -21,7 +21,7 @@ Feature: Lists
     And I send a "POST" request to "/boards" with json body
     """
     {
-    "name": "Board2 for list 2"
+    "name": "Board2 for list2"
     }
     """
     And I save the response as "B2"
@@ -40,12 +40,12 @@ Feature: Lists
     When I send a "POST" request to "/lists" with json body
     """
     {
-    "name": "List 2 for Board 1",
+    "name": "List2 for Board1",
     "idBoard":"(B1.id)"
     }
     """
     Then I validate the response has status code 200
-    And I validate the response contains "name" equals "List 2 for Board 1"
+    And I validate the response contains "name" equals "List2 for Board1"
 
   @cleanData
   Scenario: Update name and Status in List using params

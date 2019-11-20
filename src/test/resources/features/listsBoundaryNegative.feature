@@ -5,7 +5,7 @@ Feature: Boundary and negative scenarios for Lists
     And I send a "POST" request to "/boards" with json body
     """
     {
-    "name": "Board1 for list 1"
+    "name": "Board1 for listNT"
     }
     """
     And I save the response as "B1"
@@ -13,7 +13,7 @@ Feature: Boundary and negative scenarios for Lists
     And I send a "POST" request to "/lists" with json body
     """
     {
-    "name": "List 1 for Board 1",
+    "name": "List1 for BoardNT",
     "idBoard":"(B1.id)"
     }
     """

@@ -1,11 +1,11 @@
 Feature: Lists
 
   Background:
-    Given I use the "trello" service and the "owner" account
+    Given I use the "trello" service and the "user2" account
     And I send a "POST" request to "/boards" with json body
     """
     {
-    "name": "Board 1 for list 1"
+    "name": "Board1 for listGC"
     }
     """
     And I save the response as "B1"
@@ -13,7 +13,7 @@ Feature: Lists
     And I send a "POST" request to "/lists" with json body
     """
     {
-    "name": "List 1 for Board 1",
+    "name": "List1 for Board1GC",
     "idBoard":"(B1.id)"
     }
     """
@@ -21,7 +21,7 @@ Feature: Lists
     And I send a "POST" request to "/boards" with json body
     """
     {
-    "name": "Board 2 for list 2"
+    "name": "Board2 for listGC"
     }
     """
     And I save the response as "B2"
@@ -29,7 +29,7 @@ Feature: Lists
     And I send a "POST" request to "/lists" with json body
     """
     {
-    "name": "List 2 for Board 2",
+    "name": "List2 for Board2GC",
     "idBoard":"(B2.id)"
     }
     """
@@ -61,7 +61,7 @@ Feature: Lists
 
     Examples:
       | field   | value              |
-      | name    | List 2 for Board 2 |
+      | name    | List2 for Board2GC |
       | closed  | false              |
       | idBoard | {B2.id}            |
 
